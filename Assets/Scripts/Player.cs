@@ -45,6 +45,13 @@ public class Player : MonoBehaviour
             pos += Vector2.left;
         }
 
-        transform.localPosition = pos;
+        /*
+         * Add boundries
+         */
+        if ((pos.x >= -8) && (pos.x <= 8) &&
+            (pos.y >= -6) && (pos.y <= 6)) 
+        {
+            transform.localPosition = pos;
+        }
     }
 }
