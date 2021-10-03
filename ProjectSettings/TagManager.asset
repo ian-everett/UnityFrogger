@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Grass
   - Water
+  - Home
+  - Car
+  - Border
   layers:
   - Default
   - TransparentFX

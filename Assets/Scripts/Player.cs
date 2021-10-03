@@ -23,7 +23,11 @@ public class Player : MonoBehaviour
 
     private void UpdatePosition()
     {
-
+        /*
+         * Check which key pressed
+         * Assign correct sprite and
+         * move frog in correct direction
+         */
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             sr.sprite = playerUp;
@@ -50,18 +54,38 @@ public class Player : MonoBehaviour
          */
         Vector2 pos = transform.position;
         if (pos.x > 8)
+        {
             pos.x = 8;
+        }
         else if (pos.x < -8)
+        {
             pos.x = -8;
+        }
         else if (pos.y > 6)
+        {
             pos.y = 6;
+        }
         else if (pos.y < -6)
+        {
             pos.y = -6;
+        }
+
         transform.position = pos;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.tag);
+        if (collision.tag == "Water")
+        {
+            Debug.Log("Frog death");
+        }
+        else if (collision.tag == "Home")
+        {
+            Debug.Log("Frog home");
+        }
+        else if (collision.tag == "Car")
+        {
+            Debug.Log("Frog hiy by car");
+        }
     }
 }
