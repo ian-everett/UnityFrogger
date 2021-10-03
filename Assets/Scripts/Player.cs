@@ -8,11 +8,12 @@ public class Player : MonoBehaviour
     public Sprite playerUp, playerDown, playerLeft, playerRight;
 
     private SpriteRenderer sr;
+    private Rigidbody2D rb;
 
     void Start()
     {
-        Debug.Log("Start");
         sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -22,36 +23,45 @@ public class Player : MonoBehaviour
 
     private void UpdatePosition()
     {
-        Vector2 pos = transform.localPosition;
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             sr.sprite = playerUp;
-            pos += Vector2.up;
+            rb.MovePosition(rb.position + Vector2.up);
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             sr.sprite = playerDown;
-            pos += Vector2.down;
+            rb.MovePosition(rb.position + Vector2.down);
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             sr.sprite = playerRight;
-            pos += Vector2.right;
+            rb.MovePosition(rb.position + Vector2.right);
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             sr.sprite = playerLeft;
-            pos += Vector2.left;
+            rb.MovePosition(rb.position + Vector2.left);
         }
 
         /*
          * Add boundries
          */
-        if ((pos.x >= -8) && (pos.x <= 8) &&
-            (pos.y >= -6) && (pos.y <= 6)) 
-        {
-            transform.localPosition = pos;
-        }
+        Vector2 pos = transform.position;
+        if (pos.x > 8)
+            pos.x = 8;
+        else if (pos.x < -8)
+            pos.x = -8;
+        else if (pos.y > 6)
+            pos.y = 6;
+        else if (pos.y < -6)
+            pos.y = -6;
+        transform.position = pos;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log(collision.tag);
     }
 }
