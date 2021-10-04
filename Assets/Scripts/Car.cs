@@ -6,15 +6,20 @@ public class Car : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public bool rightToLeft = true;
-
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
-        rb.velocity = Vector2.left * moveSpeed;
+        if (rightToLeft)
+        {
+            rb.velocity = Vector2.left * moveSpeed;
+        }
+        else
+        {
+            rb.velocity = Vector2.right * moveSpeed; 
+        }
     }
 
     // Update is called once per frame
@@ -29,7 +34,7 @@ public class Car : MonoBehaviour
         }
         else
         {
-            if (transform.position.x <= 8.5)
+            if (transform.position.x >= 8.5)
             {
                 rb.position = new Vector2(-9, rb.position.y);
             }
